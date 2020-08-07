@@ -1,0 +1,26 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	email = igor.gotlibovych@gmail.com
+	name = Igor
+[core]
+	editor = nano
+[alias]
+[alias]
+lg = log --graph --abbrev-commit --topo-order --color --decorate --date=human --format=format:'%C(yellow)%h%C(reset) %C(auto)%d%C(reset) %<|(100,trunc) %C(white)%s%C(reset) %C(italic cyan)%an%C(reset) %C(blue)[%ad]%C(reset)' --all
+lg1 = log --all --decorate --color --oneline --graph
+lg2 = log --graph --abbrev-commit --color --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+
+cl = clone
+co = checkout
+pl = pull
+ps = push
+ct = commit
+st = status
+br = branch
+rb = rebase
+rbi = rebase --interactive
+cp = cherry-pick
