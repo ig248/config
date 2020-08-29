@@ -15,8 +15,12 @@ alias pyenv-reset-clang="rm /Users/igor/.pyenv/shims/clang"
 
 alias watch='watch --color'
 
+alias hh='hstr'
+alias tm='tmux'
+
 # Aliases that respect bash_completion
 ## git -> g
 alias g='git'
 complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
     || complete -o default -o nospace -F _git g
+
