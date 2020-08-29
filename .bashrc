@@ -91,7 +91,3 @@ if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
 if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
 export HSTR_CONFIG=hicolor,prompt-bottom,help-on-opposite-side
 export HSTR_PROMPT="history > "
-
-# Enable cycling through suggestions
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
