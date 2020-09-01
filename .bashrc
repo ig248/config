@@ -84,10 +84,6 @@ export PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -c; history -r;"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --info inline --bind "alt-down:preview-page-down,alt-up:preview-page-up"'
 export FZF_COMPLETION_TRIGGER='§'
-_fzf_setup_completion path g git source python cat bat code nano nvim
-_fzf_setup_completion dir cd tree ls ll la
-_fzf_setup_completion var set printenv export unset
-_fzf_setup_completion alias alias
 # (EXPERIMENTAL) Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
 # - You should make sure to pass the rest of the arguments to fzf.
