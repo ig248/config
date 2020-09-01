@@ -58,7 +58,7 @@ export PAGER="bat -n"
 export MANPAGER="less"
 LESSPIPE=`which src-hilite-lesspipe.sh`
 export LESSOPEN="| ${LESSPIPE} %s"
-export LESS=' -R -F -X '
+export LESS='-R'
 function man {  # run man with colors
     LESS_TERMCAP_md=$'\e[1;32m' \
     LESS_TERMCAP_mb=$'\e[1;32m' \
@@ -120,6 +120,12 @@ ulimit -n 65536 200000
 
 # http://sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
+
+# iterm2 Status Bar - support custom extpressions/variables
+function iterm2_print_user_vars() {
+  iterm2_set_user_var pyenv_version_name $(pyenv version-name)
+}
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
 
 # Work environment
 if [ -f ~/.bash/work.env ]; then
