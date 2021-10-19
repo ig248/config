@@ -32,13 +32,22 @@ fi
 complete -C '/usr/local/bin/aws_completer' aws
 
 # Pyenv is installed through Brew and is already in PATH
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-fi
+# if command -v pyenv 1>/dev/null 2>&1; then
+    # eval "$(pyenv init -)"
+# fi
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
 # Completions are added from the pyenv git repo
 export PYENV_CHECKOUT="$HOME/.pyenv/checkout"
 source $PYENV_CHECKOUT/completions/pyenv.bash
 export PYENV_VIRTUALENV_DISABLE_PROMPT=0
+
+# GNU
+export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="$(brew --prefix)/opt/grep/libexec/gnuman:$(brew --prefix)/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Poetry (installed through brew)
 export PATH="$HOME/.poetry/bin:$PATH"
@@ -47,7 +56,14 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Go
-export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:/usr/local/go/bin:$HOME/go/bin"
+
+# Rust
+source $HOME/.cargo/env
+
+# Ruby
+export PATH="/Users/igor/.gem/ruby/3.0.0/bin:/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+eval "$(rbenv init - bash)"
 
 # Other personal scripts
 export PATH="$PATH:$HOME/bin"
@@ -77,7 +93,7 @@ export HISTFILESIZE=100000               # big big history
 shopt -s histappend                      # append to history, don't overwrite it
 # Save and reload the history after each command finishes
 # Run original PROMPT_COMMAND first as that uses exit code from the previous command
-export PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -c; history -r;"
+# export PROMPT_COMMAND="$PROMPT_COMMAND; history -a; history -c; history -r;"
 
 # Fuzzy finding with fzf
 # trigger sequence by default set to **
@@ -109,9 +125,12 @@ export FORGIT_FZF_DEFAULT_OPTS="--height 100%"
 
 # Python compilation problems
 export LDFLAGS="-L/usr/local/opt/openssl/lib"
+# "-L/usr/local/opt/openblas/lib -L/usr/local/opt/lapack/lib"
 export CPPFLAGS="-I/usr/local/opt/openssl/include"
+# -I/usr/local/opt/openblas/include -I/usr/local/opt/lapack/include"
 
 # File handle limit 
+# launchctl limit maxfiles 65536 200000
 ulimit -n 65536 200000
 
 # http://sealiesoftware.com/blog/archive/2017/6/5/Objective-C_and_fork_in_macOS_1013.html
@@ -119,7 +138,8 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY="YES"
 
 # iterm2 Status Bar - support custom extpressions/variables
 function iterm2_print_user_vars() {
-  iterm2_set_user_var pyenv_version_name $(pyenv version-name)
+  iterm2_set_user_var pyenv_version_name "$(pyenv version-name)";
+  iterm2_set_user_var python_version "$(python --version)";
 }
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash" || true
 
@@ -127,3 +147,6 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 if [ -f ~/.bash/work.env ]; then
     source ~/.bash/work.env
 fi
+
+# Android Debug Bridge
+export PATH="${HOME}/adb-platform-tools:$PATH"
