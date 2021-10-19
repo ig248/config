@@ -10,8 +10,8 @@ alias .....='cd ../../..'
 function -- { cd '-'; }
 alias cls='clear'
 alias cl='clear'
-function edit { $EDITOR $@; }
-function view { $PAGER $@; }
+function edit { $EDITOR "$@"; }
+function view { $PAGER "$@"; }
 
 # some more ls aliases
 alias ll='ls -alFh'
@@ -26,9 +26,9 @@ alias watch='watch --color'
 # Aliases that respect bash_completion
 ## git -> g
 alias g='git'
-complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
-    || complete -o default -o nospace -F _git g
+___git_complete g __git_main
 
 alias tm='tmux'
-complete -o bashdefault -o default -o nospace -F _tmux tm 2>/dev/null \
-    || complete -o default -o nospace -F _tmux tm
+complete -F _tmux tm
+
+function ppgrep() { pgrep "$@" | xargs ps -fp 2> /dev/null; }
