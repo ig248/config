@@ -1,3 +1,14 @@
+# Bash completions
+## Many brew formalae install completions automatically.
+## Other completions can be added via e.g.
+## $ argo completion bash > $(brew --prefix)/etc/bash_completion.d/argo
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+else
+    echo "Not found: $(brew --prefix)/etc/bash_completion"
+fi
+complete -C '/usr/local/bin/aws_completer' aws
+
 # Alias
 if [ -f ~/.bash/.bash_aliases ]; then
     . ~/.bash/.bash_aliases
@@ -16,20 +27,6 @@ if [ -f ~/.bash/.bash_prompt ]; then
 else
     echo "Not found: ~/.bash/.bash_prompt"
 fi
-
-# TheFuck
-eval $(thefuck --alias)
-
-# Bash completions
-## Many brew formalae install completions automatically.
-## Other completions can be added via e.g.
-## $ argo completion bash > $(brew --prefix)/etc/bash_completion.d/argo
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-else
-    echo "Not found: $(brew --prefix)/etc/bash_completion"
-fi
-complete -C '/usr/local/bin/aws_completer' aws
 
 # Pyenv is installed through Brew and is already in PATH
 # if command -v pyenv 1>/dev/null 2>&1; then
@@ -150,3 +147,6 @@ fi
 
 # Android Debug Bridge
 export PATH="${HOME}/adb-platform-tools:$PATH"
+
+# TheFuck
+eval $(thefuck --alias)
